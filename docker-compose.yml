@@ -6,9 +6,27 @@ services:
     build: ./api
     ports:
       - "3001:3000"
+    depends_on:
+      db:
+        condition: service_healthy
   dashboard:
     volumes:
       - ./dashboard:/usr/src/dashboard
     build: ./dashboard
     ports:
       - "3000:3000"
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready -q -U postgres"
+volumes:
+  db:
+    driver: local
