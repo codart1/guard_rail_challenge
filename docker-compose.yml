@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  api:
+    volumes:
+      - ./api:/usr/src/api
+    build: ./api
+    ports:
+      - "3001:3000"
+  dashboard:
+    volumes:
+      - ./dashboard:/usr/src/dashboard
+    build: ./dashboard
+    ports:
+      - "3000:3000"
