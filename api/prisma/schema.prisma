@@ -1,0 +1,25 @@
+datasource db {
+    url      = env("DATABASE_URL")
+    provider = "postgresql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Result {
+    id             Int      @id @default(autoincrement())
+    queuedAt       DateTime @default(now())
+    scanningAt     DateTime @default(now())
+    finishedAt     DateTime @default(now())
+    repositoryName String
+    status         Status   @default(QUEUED)
+    finding        Json     @db.JsonB
+}
+
+enum Status {
+    QUEUED
+    IN_PROGRESS
+    SUCCESS
+    FAILURE
+}

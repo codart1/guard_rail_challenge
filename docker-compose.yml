@@ -4,6 +4,8 @@ services:
     volumes:
       - ./api:/usr/src/api
     build: ./api
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
     ports:
       - "3001:3000"
     depends_on:

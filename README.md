@@ -1,0 +1,1 @@
+dc exec api sh -c "npm run db:push"
