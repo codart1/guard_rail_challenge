@@ -39,7 +39,9 @@ export default function Layout() {
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-      <Outlet />
+      <div style={{ marginTop: '3rem' }}>
+        <Outlet />
+      </div>
     </div>
   );
 }
