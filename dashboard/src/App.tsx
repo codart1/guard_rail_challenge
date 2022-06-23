@@ -16,8 +16,9 @@ function App() {
           <Route index element={<Navigate to="/result" replace />} />
         </Route>
         <Route path="/result" element={<Layout />}>
-          <Route index element={<Result.List />} />
+          <Route path="list" element={<Result.List />} />
           <Route path=":id" element={<Result.Detail />} />
+          <Route index element={<Result.Submit />} />
         </Route>
       </Routes>
     </BrowserRouter>
