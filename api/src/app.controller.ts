@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
 
@@ -14,8 +14,15 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('r')
+  @Get('result/list')
   getResultList() {
     return this.prismaService.client.result.findMany();
+  }
+
+  @Get('result/:id')
+  getResultDetail(@Param() params) {
+    return this.prismaService.client.result.findUnique({
+      where: { id: Number(params.id) },
+    });
   }
 }

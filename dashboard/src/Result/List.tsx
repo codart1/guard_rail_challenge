@@ -3,16 +3,18 @@ import useSWR from 'swr';
 import type { Result } from '@entity';
 import { FindingData } from '../findingType';
 import { match } from 'ts-pattern';
+import { useNavigate } from 'react-router-dom';
 
 export function List() {
   const results = useResultList();
+  const navigate = useNavigate();
 
   if (!results) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Table compact>
+    <Table compact selectable>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Repository name</Table.HeaderCell>
@@ -33,7 +35,12 @@ export function List() {
             scanningAt,
           }) => {
             return (
-              <Table.Row key={id}>
+              <Table.Row
+                key={id}
+                onClick={() => {
+                  navigate(`/result/${id}`);
+                }}
+              >
                 <Table.Cell>{repositoryName}</Table.Cell>
                 <Table.Cell>
                   <Label
@@ -74,15 +81,14 @@ export function List() {
   );
 }
 
-const fetcher = (...args: Parameters<typeof fetch>) =>
-  fetch(...args).then(
-    (res) =>
-      res.json() as Promise<
-        (Omit<Result, 'finding'> & { finding: FindingData })[]
-      >
-  );
-
 const useResultList = () => {
-  const { data } = useSWR('http://localhost:3001/r', fetcher);
+  const { data } = useSWR('http://localhost:3001/result/list', (url) => {
+    return fetch(url).then(
+      (res) =>
+        res.json() as Promise<
+          (Omit<Result, 'finding'> & { finding: FindingData })[]
+        >
+    );
+  });
   return data;
 };
