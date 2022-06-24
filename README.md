@@ -34,5 +34,7 @@
 - Semantic UI React - Nice and clean UI without much effort, personally I prefer Chakra UI but this is the challenge's requirement.
 - `useSwr` for simple fetching and local state caching
 - Testing: `vitest` framework, `react-testing-library` to test closely to how our user interact with the UI, avoid testing implementation detail.
+- React router
 - No form helper, just bare React's state management primitive
 - No form validation for simplicity as said
+
