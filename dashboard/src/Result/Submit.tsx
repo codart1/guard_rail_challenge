@@ -12,13 +12,13 @@ import { match } from 'ts-pattern';
  */
 export function Submit() {
   const { state, dispatch, submit, loading } = useResultSubmitForm();
-
   return (
     <Form>
       <Header as="h1">Submit Result</Header>
       <Form.Field>
-        <label>Repository name</label>
+        <label htmlFor="repositoryName">Repository name</label>
         <input
+          id="repositoryName"
           value={state.repositoryName}
           onChange={(e) =>
             dispatch({
@@ -33,6 +33,7 @@ export function Submit() {
         <label>Status</label>
         {Object.values(Status).map((s) => (
           <Form.Radio
+            id={s}
             key={s}
             label={s}
             value="sm"
@@ -44,6 +45,7 @@ export function Submit() {
         ))}
       </Form.Group>
       <Form.TextArea
+        id="finding"
         label="Finding"
         placeholder="Json data of finding..."
         value={state.finding}
@@ -62,7 +64,7 @@ export function Submit() {
   );
 }
 
-enum Status {
+export enum Status {
   QUEUED = 'QUEUED',
   IN_PROGRESS = 'IN_PROGRESS',
   SUCCESS = 'SUCCESS',

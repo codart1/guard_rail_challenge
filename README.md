@@ -10,8 +10,13 @@
 4. open `http://localhost:3000/` and start testing
 <br/><br/>
 ### screenshots
-![alt text](img/result.gif)
+![demo](img/result.gif)
+![test](img/test.gif)
 <br/><br/>
+
+### Run test
+`docker-compose exec dashboard sh -c "npm test"`
+
 ### Tech stack overview   
 
 **Devops**
@@ -19,7 +24,7 @@
 - For deployment, separated Dockerfile which uses multi stages build is needed (Not covered in this repo)
 
 **Backend**:
-- NestJS - an oppiniate web framework which embraces typescript and dependency injection. Helping us to organize code and scale better.
+- NestJS - an opinionated web framework which embraces typescript and dependency injection. Helping us to organize code and scale better.
 - Prisma - not only an ORM but also generate a type-safe client sdk so we can get the most out of typescript
 - No graphql, just ordinary REST endpoint for simplicity
 - No foreign input validation to keep it simple, in reality, we should validate all input, for both backend and frontend
@@ -28,5 +33,6 @@
 - Vite instead of CRA for development because it's faster by leveraging es-module, while CRA will be slower as the code base grows
 - Semantic UI React - Nice and clean UI without much effort, personally I prefer Chakra UI but this is the challenge's requirement.
 - `useSwr` for simple fetching and local state caching
+- Testing: `vitest` framework, `react-testing-library` to test closely to how our user interact with the UI, avoid testing implementation detail.
 - No form helper, just bare React's state management primitive
 - No form validation for simplicity as said
